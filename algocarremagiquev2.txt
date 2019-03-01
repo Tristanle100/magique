@@ -1,0 +1,95 @@
+Programme carre;
+
+VAR care:tableau[1..TAILLECARRE,1..TAILLECARRE] De entier
+i,j,k;Entier;
+Procedure init;
+	//BUT : initialisation de toutes les cases du carré
+//ENTREE : la premiere case i=1 et j=1
+//SORTIE : la derniere case i=5 et j=5
+BEGIN
+	POUR i:=1 à TAILLECARRE FAIRE
+		POUR j:=1 à TAILLECARRE FAIRE
+				care[i,j]:=0; // la case est libre ou non
+		FINPOUR
+	FINPOUR
+END;
+
+Procedure creation;
+//BUT : Crée le carré
+//ENTREE : On commence par la valeur 1
+//SORTIE : On dit au chiffre d'aller au nord est, si la case est vide il la comble sinon il continue et va au nord ouest
+VAR caz: integer;
+
+BEGIN
+
+	POUR i de 1 à TAILLECARRE FAIRE
+	POUR j de 1 à TAILLECARRE FAIRE
+	care[i,j]<= O
+	FINPOUR
+	FINPOUR
+
+//numéro 1
+	caz<=1
+	i<=TAILLECARRE DIV 2 +1
+	j<=TAILLECARRE DIV 2
+		care[i,j]<=caz
+
+//BOUCLE
+	POUR k de 2 à (TAILLECARRE*TAILLECARRE) FAIRE
+		j<=j-1
+		i<=i+1
+
+		SI j=0 ALORS
+			j=TAILLECARRE
+			FINSI
+
+		SI i=TAILLECARRE+1 ALORS
+			i<=1
+			FINSI
+
+//SI LA CASE EST VIDE ====> NORD-EST
+	SI (care[i,j]=0) ALORS
+		SI i=TAILLECARRE+1 ALORS
+			I<=1
+			FINSI
+		care[i,j]<=k
+		SI j=0 ALORS
+			j=TAILLECARRE
+			FINSI
+		FINSI
+	SINON
+		i<=i-1
+		j<=j-1
+			SI j=0 ALORS
+				j<=TAILLECARRE
+				FINSI
+			SI i=0 then
+				i<=TAILLECARRE
+				FINSI
+			SI i=TAILLECARRE+1 then
+				i<=1
+				FINSI
+		care[i,j]<=k
+	FINPOUR
+Procedure affichage;
+//BUT : afficher le carré
+//ENTREE : les valeurs du tableau
+//SORTIE : mettre les traits pour une meilleur lisibilité
+			POUR i de 1 à TAILLECARRE FAIRE
+				POUR j de 1 à TAILLECARRE FAIRE 
+					ECRIRE("|")
+					ECRIRE(care[j,i]:2)
+				FINPOUR
+				ECRIRE("|")
+				ECRIRE("")
+		LIRE("")
+FIN
+
+BEGIN
+	creation();
+	affichage();
+	readln;
+END.
+
+
+
